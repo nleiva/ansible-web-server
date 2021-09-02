@@ -1,6 +1,10 @@
 # Web Server in Azure with Ansible
 [![Ansible Lint](https://github.com/nleiva/ansible-webserver-azure/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/nleiva/ansible-webserver-azure/actions/workflows/ansible-lint.yml)
 
+<p align="center">
+<img height="400" src="./pictures/webserver.svg">
+</p>
+
 ## Requirements
 
 Ansible 2.9+ needs to be [installed](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-with-pip) in your computer to run this example. [Python3](https://wiki.python.org/moin/BeginnersGuide/Download) as well.
