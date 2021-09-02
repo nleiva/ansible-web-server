@@ -1,0 +1,47 @@
+- name: Setup hostname
+  ansible.builtin.hostname:
+    name: "{{ hostvars[inventory_hostname]['instance_name'] }}"
+  when: hostvars[inventory_hostname]['instance_name'] is defined
+
+- name: Install EPEL repo
+  package:
+    name: "{{ epel_repo }}"
+    state: present
+  register: result
+  until: result is succeeded
+  retries: 5
+  delay: 10
+  when: ansible_facts['distribution'] in epel_distro
+
+- name: Run the equivalent of "apt-get update" as a separate step for Ubuntu
+  apt:
+    update_cache: yes
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Install base packages
+  ansible.builtin.package:
+    name: "{{ base_software[ansible_distribution_file_variety] | union(common_software) }}"
+    state: present
+  register: package_check
+  until: package_check is not failed
+  retries: 4
+  delay: 5
+
+- name: Install Python dependencies for Python {{ python_ver }}
+  ansible.builtin.pip:
+    name: "{{ python_libraries }}"
+    executable: "pip{{ python_ver }}"
+
+- name: Setup custom prompt
+  ansible.builtin.copy:
+    src: prompt.sh
+    dest: /etc/profile.d/prompt.sh
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Make Ubuntu source the prompt file
+  ansible.builtin.lineinfile:
+    path: "/home/{{ ansible_user }}/.bashrc"
+    line: source /etc/profile.d/prompt.sh
+  when: ansible_distribution == 'Ubuntu'

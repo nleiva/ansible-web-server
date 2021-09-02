@@ -1,0 +1,11 @@
+- name: Delete Load Balancer
+  azure.azcollection.azure_rm_loadbalancer:
+    name: "{{ az_load_balancer }}"
+    resource_group: "{{ az_resource_group }}"
+    state: absent
+
+- name: Delete public static IP for Load Balancer
+  azure.azcollection.azure_rm_publicipaddress:
+    name: "{{ az_frontend_ip }}"
+    resource_group: "{{ az_resource_group }}"
+    state: absent

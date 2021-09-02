@@ -1,0 +1,5 @@
+- name: Configure common Linux stuff
+  include_tasks: common.yml
+
+- name: Setup Web Server
+  include_tasks: setup_web.yml

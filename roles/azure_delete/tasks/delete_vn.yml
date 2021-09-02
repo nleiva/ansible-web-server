@@ -1,0 +1,5 @@
+- name: Delte Virtual Network
+  azure.azcollection.azure_rm_virtualnetwork:
+    name: "{{ az_virtual_network }}"
+    resource_group: "{{ az_resource_group }}"
+    state: absent

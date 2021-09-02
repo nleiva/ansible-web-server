@@ -1,0 +1,6 @@
+- name: Create resource group '{{ az_resource_group }}'
+  azure.azcollection.azure_rm_resourcegroup:
+    name: "{{ az_resource_group }}"
+    location: "{{ az_location }}"
+    tags:
+      Environment: "{{ az_prefix }}"

@@ -1,0 +1,36 @@
+- name: Create shared resources
+  block:
+  - name: Create Resource Group
+    ansible.builtin.include_tasks: create_rg.yml
+
+  - name: Create Availability Set
+    ansible.builtin.include_tasks: create_aset.yml
+
+  - name: Create Virtual Network
+    ansible.builtin.include_tasks: create_vn.yml
+
+  - name: Create Subnet
+    ansible.builtin.include_tasks: create_subnet.yml
+
+  - name: Create Security Group
+    ansible.builtin.include_tasks: create_sg.yml
+  when: first
+
+- name: Create Public IP
+  ansible.builtin.include_tasks: create_pubip.yml
+
+- name: Create Network Interface
+  ansible.builtin.include_tasks: create_net_interface.yml
+
+# - name: Create Storage Account
+#   ansible.builtin.include_tasks: create_storage.yml
+
+- name: Provision VM
+  ansible.builtin.include_tasks: create_vm.yml
+
+- name: Wait until we can SSH to the last instance
+  ansible.builtin.wait_for:
+    host: "{{ create_pub_ip.state.ip_address }}"
+    port: 22
+    state: started
+  when: last

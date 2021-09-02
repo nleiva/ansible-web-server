@@ -1,0 +1,5 @@
+- name: Delete a resource group {{ az_resource_group }}
+  azure.azcollection.azure_rm_resourcegroup:
+    name: "{{ az_resource_group }}"
+    location: "{{ az_location }}"
+    state: absent

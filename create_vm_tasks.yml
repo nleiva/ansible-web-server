@@ -1,0 +1,24 @@
+- name: Include variable names
+  ansible.builtin.include_vars: "./vars/az_names.yml"
+
+- name: Include distribution specific variables
+  ansible.builtin.include_vars: "./vars/os_{{ vm.value }}.yml"
+
+- name: Determine if this is the first VM
+  set_fact:
+    first: "{{ ansible_loop.first }}"
+
+- name: Create {{ vm.value }} VM in Azure
+  ansible.builtin.include_role:
+    name: azure_create_vm
+
+- name: Add instance {{ vm.key }} to my_instances group
+  ansible.builtin.add_host:
+    name: "{{ az_virtual_machine }}{{ vm.key }}"
+    ansible_host: "{{ create_pub_ip.state.ip_address }}"
+    ansible_user: "{{ az_vm_username }}"
+    ansible_ssh_private_key_file: "{{ ssh_private_key }}"
+    instance_name: "{{ az_virtual_machine }}"
+    groups:
+      - my_instances
+  no_log: True

@@ -1,0 +1,17 @@
+- name: Create network interface for '{{ az_virtual_machine }}' with a Public IP
+  azure.azcollection.azure_rm_networkinterface:
+    name: "{{ az_network_interface }}"
+    resource_group: "{{ az_resource_group }}"
+    virtual_network: "{{ az_virtual_network }}"
+    subnet: "{{ az_subnet }}"
+    ip_configurations:
+      - name: "{{ az_ip_config }}"
+        public_ip_address_name:  "{{ az_public_ip }}"
+        public_ip_allocation_method: Static
+        primary: yes
+        load_balancer_backend_address_pools:
+          - name: "{{ az_backend_pool }}"
+            load_balancer: "{{ az_load_balancer }}"
+    security_group: "{{ az_security_group }}"
+    tags:
+      Environment: "{{ az_prefix }}"

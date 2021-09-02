@@ -1,0 +1,32 @@
+- name: Create Resource Group
+  ansible.builtin.include_tasks: create_rg.yml
+
+- name: Create public static IP for Load Balancer
+  azure.azcollection.azure_rm_publicipaddress:
+    name: "{{ az_frontend_ip }}"
+    resource_group: "{{ az_resource_group }}"
+    allocation_method: static
+    domain_name: "{{ az_fqdn }}"
+    tags:
+      Environment: "{{ az_prefix }}"
+  register: create_lb_ip
+
+- name: Create Load Balancer
+  azure.azcollection.azure_rm_loadbalancer:
+    name: "{{ az_load_balancer }}"
+    resource_group: "{{ az_resource_group }}"
+    frontend_ip_configurations:
+      - name: "{{ az_frontend }}"
+        public_ip_address: "{{ az_frontend_ip }}"
+    backend_address_pools:
+      - name: "{{ az_backend_pool }}"
+    probes:
+      - name: "{{ az_probes }}"
+        port: 80
+    load_balancing_rules:
+      - name: "{{ az_lb_rules }}"
+        frontend_ip_configuration: "{{ az_frontend }}"
+        backend_address_pool: "{{ az_backend_pool }}"
+        frontend_port: 80
+        backend_port: 80
+        probe: "{{ az_probes }}"

@@ -1,0 +1,7 @@
+web_dir: /var/www/html
+web_app: apache2
+
+image_offer: 0001-com-ubuntu-server-focal
+image_publisher: Canonical
+image_sku: 20_04-lts
+image_version: latest

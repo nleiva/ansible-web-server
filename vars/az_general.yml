@@ -1,0 +1,24 @@
+az_location: 'East US'
+az_vm_size: Standard_B1s
+# az_storage_type: Standard_LRS
+# az_os_disk_type: StandardSSD_LRS
+
+az_cidr_block: "172.16.0.0/16"
+az_subnet_block: "172.16.0.0/24"
+
+# Azure fixed resource names
+az_vm_username: "{{ username }}"
+az_prefix: "{{ prefix | default('testbed') }}"
+az_resource_group: "{{ az_prefix }}-rg"
+az_virtual_network: "{{ az_prefix }}-vnet"
+az_subnet: "{{ az_prefix }}-subnet"
+az_security_group: "{{ az_prefix }}-secgrp"
+az_load_balancer: "{{ az_prefix }}-lb"
+az_backend_pool: "{{ az_prefix }}-pool"
+az_frontend: "{{ az_prefix }}-frontend"
+az_frontend_ip: "{{ az_prefix }}-frontend-ip"
+az_fqdn: "{{ az_prefix }}"
+az_ip_lb_config: "{{ az_prefix }}-ip-lb-conf"
+az_probes: "{{ az_prefix }}-probes"
+az_lb_rules: "{{ az_prefix }}-lb-rules"
+az_availability_set: "{{ az_prefix }}-avail-set"

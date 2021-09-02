@@ -1,0 +1,21 @@
+- name: Create Security Group that allows SSH/HTTP/HTTPS for '{{ az_virtual_machine }}'
+  azure.azcollection.azure_rm_securitygroup:
+    name: "{{ az_security_group }}"
+    resource_group: "{{ az_resource_group }}"
+    rules:
+      - name: SSH
+        protocol: Tcp
+        destination_port_range: 22
+        access: Allow
+        priority: 1001
+        direction: Inbound
+      - name: WebTraffic
+        protocol: Tcp
+        destination_port_range:
+          - 80
+          - 443
+        access: Allow
+        priority: 1002
+        direction: Inbound
+    tags:
+      Environment: "{{ az_prefix }}"

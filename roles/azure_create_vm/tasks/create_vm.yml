@@ -1,0 +1,21 @@
+- name: Create Virtual Machine '{{ az_virtual_machine }}'
+  azure.azcollection.azure_rm_virtualmachine:
+    name: "{{ az_virtual_machine }}"
+    resource_group: "{{ az_resource_group }}"
+    vm_size: "{{ az_vm_size }}"
+    availability_set: "{{ az_availability_set }}"
+    # managed_disk_type: "{{ az_os_disk_type }}"
+    # storage_account_name: "{{ az_storage_account }}"
+    admin_username: "{{ az_vm_username }}"
+    ssh_password_enabled: false
+    ssh_public_keys:
+      - path: "/home/{{ az_vm_username }}/.ssh/authorized_keys"
+        key_data: "{{ ssh_pubkey }}"
+    network_interfaces: "{{ az_network_interface }}"
+    image:
+      offer: "{{ image_offer }}"
+      publisher: "{{ image_publisher }}"
+      sku: "{{ image_sku }}"
+      version: "{{ image_version }}"
+    tags:
+        Environment: "{{ az_prefix }}"

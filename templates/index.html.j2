@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>My Page</title>
+  <link rel="stylesheet" href="stylesheets/main.css">
+</head>
+<body>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Ansible_Logo.png" alt="A logo">
+  <ul> <!-- Make these variable -->
+    <li><b>Inventory Hostname</b>: {{ inventory_hostname }}</li>
+    <li><b>Host IP address</b>: {{ ansible_host }}</li>
+    <li><b>Linux distribution</b>: {{ ansible_distribution }}</li>
+  </ul>
+</body>
+</html>

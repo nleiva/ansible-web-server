@@ -1,0 +1,8 @@
+- name: Create Public Static IP for '{{ az_virtual_machine }}'
+  azure.azcollection.azure_rm_publicipaddress:
+    name: "{{ az_public_ip }}"
+    resource_group: "{{ az_resource_group }}"
+    allocation_method: static
+    tags:
+      Environment: "{{ az_prefix }}"
+  register: create_pub_ip

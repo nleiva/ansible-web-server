@@ -1,0 +1,7 @@
+- name: Create Storage account
+  azure.azcollection.azure_rm_storageaccount:
+    name: "{{ az_storage_account }}"
+    resource_group: "{{ az_resource_group }}"
+    type: "{{ az_storage_type }}"
+    tags:
+      Environment: "{{ az_prefix }}"

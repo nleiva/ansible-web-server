@@ -1,0 +1,35 @@
+python_ver: "{{ ansible_python.version.major }}"
+
+# Common to all distros
+common_software:
+  - git
+  - wget
+  - tree
+  - tar
+  - "python{{ python_ver }}-pip"
+#  - ansible
+
+# ansible_distribution_file_variety
+base_software:
+  Debian:
+    - dnsutils
+    - build-essential
+    - "python{{ python_ver }}-dev"
+    - apache2
+  RedHat:
+    - bind-utils
+    - gcc
+    - "python{{ python_ver }}-devel"
+    - httpd
+
+python_libraries:
+- ipaddress
+
+software_additional: []
+
+epel_repo: epel-release
+epel_distro:
+  - CentOS
+  - RedHat
+
+docker_repo_url: https://download.docker.com/linux

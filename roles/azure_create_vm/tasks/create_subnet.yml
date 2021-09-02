@@ -1,0 +1,6 @@
+- name: Add Subnet to Network '{{ az_virtual_network }}'
+  azure.azcollection.azure_rm_subnet:
+    name: "{{ az_subnet }}"
+    resource_group: "{{ az_resource_group }}"
+    address_prefix_cidr: "{{ az_subnet_block }}"
+    virtual_network_name: "{{ az_virtual_network }}"

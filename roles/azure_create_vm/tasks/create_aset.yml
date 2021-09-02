@@ -1,0 +1,7 @@
+- name: Create Availability Set '{{ az_availability_set }}'
+  azure.azcollection.azure_rm_availabilityset:
+    name: "{{ az_availability_set }}"
+    resource_group: "{{ az_resource_group }}"
+    location: "{{ az_location }}"
+    tags:
+      Environment: "{{ az_prefix }}"

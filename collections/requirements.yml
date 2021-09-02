@@ -1,0 +1,4 @@
+collections:
+  - name: azure.azcollection
+    version: 1.7.0
+    #source: https://galaxy.ansible.com

@@ -1,0 +1,40 @@
+- name: Create Azure Resources
+  hosts: localhost
+  connection: local
+  gather_facts: yes
+  vars_files:
+    - ./vars/common.yml
+    - ./vars/az_general.yml
+    - ./vars/vms.yml
+
+  roles:
+      - { role: check_vars }
+      - { role: install_dependencies, when: dependencies_check }
+
+  tasks:
+    - name: Create LB in Azure
+      ansible.builtin.include_role:
+        name: azure_create_lb
+
+    - name: Loop over desired Virtual Machines (VMs)
+      ansible.builtin.include_tasks: create_vm_tasks.yml
+      loop: "{{ vms | dict2items }}"
+      loop_control:
+        loop_var: vm
+        extended: yes
+
+# Play 2: Configure the instance(s) we created
+- name: Configure Instance
+  hosts: "my_instances"
+  gather_facts: true
+
+  pre_tasks:
+    - name: Include distribution specific variables
+      ansible.builtin.include_vars: "./vars/os_{{ ansible_distribution | lower }}.yml"
+
+    - name: Display variables/facts known for instance
+      ansible.builtin.debug:
+        msg: "Running {{ ansible_distribution }} {{ ansible_distribution_version }} ({{ ansible_os_family }}), IP address: {{ ansible_host }}"
+
+  roles:
+      - { role: configure_instance, become: true }

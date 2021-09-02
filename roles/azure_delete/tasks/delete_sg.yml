@@ -1,0 +1,5 @@
+- name: Delete Security Group
+  azure.azcollection.azure_rm_securitygroup:
+    name: "{{ az_security_group }}"
+    resource_group: "{{ az_resource_group }}"
+    state: absent
