@@ -17,7 +17,7 @@ python -m pip install --user ansible
 
 ### Python libraries
 
-As we interact with AWS, we need a couple of Python libraries to be present in the system.
+As we interact with Azure, we need a couple of Python libraries to be present in the system.
 
 ```bash
 pip install --user -r requirements.txt
@@ -59,7 +59,7 @@ Follow these steps to provision the Web Server.
 
 1. Clone this repository: `git clone https://github.com/nleiva/aws-testbed.git`
 
-2. Make your [AWS account credentials](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) (`AWS_ACCESS_KEY` and `AWS_SECRET_KEY`) available as environment variables (`export`).
+2. Make your [Azure service principal parameters](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal) (`AZURE_SUBSCRIPTION_ID`, `AZURE_CLIENT_ID`, `AZURE_SECRET`, and `AZURE_TENANT`) available as environment variables (`export`).
 
 ```bash
 export AZURE_SUBSCRIPTION_ID='...'

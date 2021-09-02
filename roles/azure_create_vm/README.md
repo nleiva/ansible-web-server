@@ -1,5 +1,5 @@
-Azure Create AKS
-================
+Azure Create VM
+===============
 
 A brief description of the role goes here.
 
@@ -9,7 +9,7 @@ Requirements
 Several Python [packages are required](https://github.com/ansible-collections/azure/blob/dev/requirements-azure.txts).
 
 ```
-pip3 install -r requirements_aks.txt
+pip3 install -r requirements.txt
 ```
 
 
@@ -30,7 +30,7 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: localhost
       roles:
-         - { role: ansible-kubernetes.azure_create_aks }
+         - { role: ansible-webserver-azure.azure_create_vm }
 
 License
 -------
