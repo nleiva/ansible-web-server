@@ -1,6 +1,8 @@
 # Web Server in Azure with Ansible
 [![Ansible Lint](https://github.com/nleiva/ansible-webserver-azure/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/nleiva/ansible-webserver-azure/actions/workflows/ansible-lint.yml)
 
+The goal is to automatically provision a number webserver instances behind a load balancer on Azure. These instances, while typically are identical to one another, we can make them a mix of different Linux distributions (just for fun). 
+
 <p align="center">
 <img height="400" src="./pictures/webserver.svg">
 </p>
@@ -100,18 +102,20 @@ testbed-vm22               : ok=15   changed=9    unreachable=0    failed=0    s
 
 ## Accessing the Web Server
 
-We distribute the traffic among the instances to prevent failure in case any of them fails. By default the web server is at http://testbed.eastus.cloudapp.azure.com/. you can modify this with the variable `prefix`, that by default is `testbed`.
+We distribute the traffic among the instances using a load balancer to prevent failure in case any of the virtual machines fail. By default the web server is at http://testbed.eastus.cloudapp.azure.com/. You can modify this with the variable `prefix`, which by default is `testbed`.
+
+This URL will take you to one of the backend VM's. For example:
 
 ### VM1
 
 <p align="center">
-<img height="400" src="./pictures/centos.png">
+<img src="./pictures/centos.png">
 </p>
 
 ### VM2
 
 <p align="center">
-<img height="400" src="./pictures/ubuntu.png">
+<img src="./pictures/ubuntu.png">
 </p>
 
 ## Deleting the resources
