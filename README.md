@@ -1,4 +1,5 @@
 # Web Server in Azure with Ansible
+[![Ansible Lint](https://github.com/nleiva/ansible-webserver-azure/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/nleiva/ansible-webserver-azure/actions/workflows/ansible-lint.yml)
 
 ## Requirements
 
