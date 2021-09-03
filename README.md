@@ -17,12 +17,6 @@ To authenticate via service principal, provide these variables; `subscription_id
 - `AZURE_CLIENT_ID` and `AZURE_TENANT`: [Register an application with Azure AD and create a service principal](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#register-an-application-with-azure-ad-and-create-a-service-principal)
 - `AZURE_SECRET`: [Create a new application secret](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#option-2-create-a-new-application-secret)
 
-#### Azure credentials in Ansible Tower
-
-<p align="center">
-<img src="./pictures/tower_Azure_cred.png">
-</p>
-
 ### SSH Public key
 
 You need to provide your SSH Key pair, so Azure can add your public SSH Key to `~/.ssh/authorized_keys` in the instances it creates. Hence, Ansible can use the Private Key to configure these instances.
@@ -37,7 +31,15 @@ Follow these steps to provision the Web Server.
 
 1. Create a Project with this repo: `https://github.com/nleiva/ansible-webserver-azure`. I called the Project `Azure WebServer`.
 
+<p align="center">
+<img src="./pictures/tower_project.png">
+</p>
+
 2. Create a [Microsoft Azure Resource Manager](https://docs.ansible.com/ansible-tower/latest/html/userguide/credentials.html#microsoft-azure-resource-manager) with your [Azure service principal parameters](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal); `AZURE_SUBSCRIPTION_ID`, `AZURE_CLIENT_ID`, `AZURE_SECRET`, and `AZURE_TENANT`.
+
+<p align="center">
+<img src="./pictures/tower_Azure_cred.png">
+</p>
 
 3. The number and operating system of the backend servers is defined with the variable `vms`. Its default is defined in the [vms file](vars/vms.yml). It list 2 instances; one running `centos`, and the other one `ubuntu` (these are the two distributions supported at the moment). You can pass any other values as extra-vars
 
