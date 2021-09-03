@@ -1,7 +1,7 @@
 # Web Server in Azure with Ansible
 [![Ansible Lint](https://github.com/nleiva/ansible-webserver-azure/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/nleiva/ansible-webserver-azure/actions/workflows/ansible-lint.yml)
 
-The goal is to automatically provision a number webserver instances behind a load balancer on Azure. These instances, while typically are identical to one another, we can make them a mix of different Linux distributions (just for fun). 
+The goal is to automatically provision a number of webserver instances behind a load balancer on Azure. These instances, while typically are identical to one another, we can make them a mix of different Linux distributions (just for fun). 
 
 <p align="center">
 <img height="400" src="./pictures/webserver.svg">
