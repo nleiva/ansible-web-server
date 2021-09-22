@@ -1,7 +1,7 @@
-# Web Server in Azure with Ansible
-[![Ansible Lint](https://github.com/nleiva/ansible-webserver-azure/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/nleiva/ansible-webserver-azure/actions/workflows/ansible-lint.yml)
+# Highly available Web Server on a cloud provider with Ansible
+[![Ansible Lint](https://github.com/nleiva/ansible-web-server/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/nleiva/ansible-web-server/actions/workflows/ansible-lint.yml)
 
-The goal is to provision one or more web server instances behind a load balancer on Azure automatically. These instances, while they are typically identical to one another, can run a mix of different Linux distributions (just for fun). 
+The goal is to provision one or more web server instances behind a load balancer on any cloud provider automatically.See the following image for an example on Azure. 
 
 <p align="center">
 <img height="400" src="./pictures/webserver.svg">
@@ -9,27 +9,16 @@ The goal is to provision one or more web server instances behind a load balancer
 
 ## Requirements
 
-### Azure credentials
+- [AWS](aws.md)
+- [Azure](azure.md)
+- [GCP](gcp.md)
 
-To authenticate via service principal to Azure, you need to provide these variables; `subscription_id`, `client_id`, `secret` and `tenant` or set them as environment variables;`AZURE_SUBSCRIPTION_ID`, `AZURE_CLIENT_ID`, `AZURE_SECRET` and `AZURE_TENANT`. More details on the following links:
-
-- `AZURE_SUBSCRIPTION_ID`: [Find your Azure subscription](https://docs.microsoft.com/en-us/azure/media-services/latest/setup-azure-subscription-how-to?tabs=portal)
-- `AZURE_CLIENT_ID` and `AZURE_TENANT`: [Register an application with Azure AD and create a service principal](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#register-an-application-with-azure-ad-and-create-a-service-principal)
-- `AZURE_SECRET`: [Create a new application secret](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#option-2-create-a-new-application-secret)
-
-### SSH Public key
-
-You need to provide an SSH Key pair, so Azure can add the public SSH Key to `~/.ssh/authorized_keys` in the instances it creates. Ansible uses the Private Key to configure these instances after they are created.
-
-<p align="center">
-<img src="./pictures/tower_SSH_Key.png">
-</p>
 
 ## Creating a Job Template to Deploy the Web Server(s)
 
 Follow these steps to provision the Web Server(s).
 
-1. Create a Project with for this repo (`https://github.com/nleiva/ansible-webserver-azure`). I called the Project `Azure WebServer` in the example below.
+1. Create a Project with for this repo (`https://github.com/nleiva/ansible-web-server`). I called the Project `Azure WebServer` in the example below.
 
 <p align="center">
 <img src="./pictures/tower_project.png">
