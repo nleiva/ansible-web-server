@@ -1,4 +1,4 @@
-- name: Create network interface for '{{ az_virtual_machine }}' with a Public IP
+- name: Create network interface for '{{ virtual_machine }}' with a Public IP
   azure.azcollection.azure_rm_networkinterface:
     name: "{{ az_network_interface }}"
     resource_group: "{{ az_resource_group }}"

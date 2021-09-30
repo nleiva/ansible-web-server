@@ -5,6 +5,9 @@ private_key_file: "{{ filepath2 | default('~/.ssh/id_rsa') }}"
 ssh_pubkey: "{{ lookup('file', pubkey_file) }}"
 ssh_private_key: "{{ lookup('file', private_key_file) }}"
 
+cloud_provider: "{{ cloud | default('azure') }}"
+delete: false
+
 # Playbook default vars
 dependencies_check: false
 first: true

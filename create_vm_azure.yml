@@ -1,5 +1,5 @@
 - name: Include variable names
-  ansible.builtin.include_vars: "./vars/azure_names.yml"
+  ansible.builtin.include_vars: "./vars/{{ cloud_provider }}_names.yml"
 
 - name: Include distribution specific variables
   ansible.builtin.include_vars: "./vars/os_{{ vm.value }}.yml"
@@ -12,9 +12,9 @@
   set_fact:
     last: "{{ ansible_loop.last }}"
 
-- name: Create {{ vm.value }} VM in Azure
+- name: Create {{ vm.value }} VM in {{ cloud_provider }}
   ansible.builtin.include_role:
-    name: azure_create_vm
+    name: "{{ cloud_provider }}_create_vm"
 
 - name: Add instance {{ vm.key }} to my_instances group
   ansible.builtin.add_host:
@@ -23,6 +23,7 @@
     ansible_user: "{{ vm_username }}"
     ansible_ssh_private_key_file: "{{ ssh_private_key }}"
     instance_name: "{{ virtual_machine }}"
+    cloud: "{{ cloud_provider | capitalize }}"
     groups:
       - my_instances
   no_log: True

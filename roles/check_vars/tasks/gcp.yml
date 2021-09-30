@@ -1,0 +1,23 @@
+- name: Check GCP_PROJECT is defined as an environment variable
+  ansible.builtin.fail:
+    msg: "GCP_PROJECT is not defined. Provide your Project ID with 'export GCP_PROJECT=...'"
+  when:
+    - check == 'n/a'
+  vars:
+    check: "{{ lookup('env', 'GCP_PROJECT') | default('n/a', True) }}"
+
+- name: Check GCP_AUTH_KIND is defined as an environment variable
+  ansible.builtin.fail:
+    msg: "GCP_AUTH_KIND is not defined. Provide your Credential type with 'export GCP_AUTH_KIND=...'"
+  when:
+    - check == 'n/a'
+  vars:
+    check: "{{ lookup('env', 'GCP_AUTH_KIND') | default('n/a', True) }}"
+
+- name: GCP_SERVICE_ACCOUNT_FILE is defined as an environment variable
+  ansible.builtin.fail:
+    msg: "GCP_SERVICE_ACCOUNT_FILE is not defined. Provide your Service Account JSON file type with 'export GCP_SERVICE_ACCOUNT_FILE=...'"
+  when:
+    - check == 'n/a'
+  vars:
+    check: "{{ lookup('env', 'GCP_SERVICE_ACCOUNT_FILE') | default('n/a', True) }}"

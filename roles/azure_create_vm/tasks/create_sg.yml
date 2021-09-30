@@ -1,4 +1,4 @@
-- name: Create Security Group that allows SSH/HTTP/HTTPS for '{{ az_virtual_machine }}'
+- name: Create Security Group that allows SSH/HTTP/HTTPS for '{{ virtual_machine }}'
   azure.azcollection.azure_rm_securitygroup:
     name: "{{ az_security_group }}"
     resource_group: "{{ az_resource_group }}"

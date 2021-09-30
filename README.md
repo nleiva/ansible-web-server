@@ -1,7 +1,7 @@
-# Highly available Web Server on a cloud provider with Ansible
+# Highly available Web Application on a cloud provider with Ansible
 [![Ansible Lint](https://github.com/nleiva/ansible-web-server/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/nleiva/ansible-web-server/actions/workflows/ansible-lint.yml)
 
-The goal is to provision one or more web server instances behind a load balancer on any cloud provider automatically.See the following image for an example on Azure. 
+The goal is to provision one or more web server instances behind a load balancer on any cloud provider automatically. See the following image for an example on Azure. 
 
 <p align="center">
 <img height="400" src="./pictures/webserver.svg">

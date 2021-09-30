@@ -1,0 +1,13 @@
+- name: Include variable names
+  ansible.builtin.include_vars: "./vars/{{ cloud_provider }}_names.yml"
+
+- name: Include distribution specific variables
+  ansible.builtin.include_vars: "./vars/os_{{ vm.value }}.yml"
+
+- name: Determine if this is the last VM
+  set_fact:
+    last: "{{ ansible_loop.last }}"
+
+- name: Delete {{ vm.value }} VM in {{ cloud_provider }}
+  ansible.builtin.include_role:
+    name: "{{ cloud_provider }}_delete"

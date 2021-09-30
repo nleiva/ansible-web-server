@@ -1,1 +1,2 @@
 supported_os: ['centos', 'ubuntu']
+supported_clouds: ['aws', 'azure', 'gcp']

@@ -1,22 +1,8 @@
-- name: Check AZURE_SUBSCRIPTION_ID is defined as an environment variable
-  ansible.builtin.fail:
-    msg: "AZURE_SUBSCRIPTION_ID is not defined. Provide your Key with 'export AZURE_SUBSCRIPTION_ID=...'"
-  when: ansible_env.AZURE_SUBSCRIPTION_ID is not defined
+- name: Check that Cloud Provider selected is supported
+  ansible.builtin.assert: { that: "cloud_provider in supported_clouds" }
 
-- name: Check AZURE_CLIENT_ID is defined as an environment variable
-  ansible.builtin.fail:
-    msg: "AZURE_CLIENT_ID is not defined. Provide your Key with 'export AZURE_CLIENT_ID=...'"
-  when: ansible_env.AZURE_CLIENT_ID is not defined
-
-- name: Check AZURE_SECRET is defined as an environment variable
-  ansible.builtin.fail:
-    msg: "AZURE_SECRET is not defined. Provide your Key with 'export AZURE_SECRET=...'"
-  when: ansible_env.AZURE_SECRET is not defined
-
-- name: Check AZURE_TENANT is defined as an environment variable
-  ansible.builtin.fail:
-    msg: "AZURE_TENANT is not defined. Provide your Key with 'export AZURE_TENANT=...'"
-  when: ansible_env.AZURE_TENANT is not defined
+- name: Include cloud-specific checks
+  ansible.builtin.include_tasks: "{{ cloud_provider }}.yml"
 
 - name: Loop over virtual machine options to validate the OS is supported
   ansible.builtin.assert: { that: "item.value in supported_os" }

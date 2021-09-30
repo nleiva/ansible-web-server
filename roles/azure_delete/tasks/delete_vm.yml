@@ -1,6 +1,6 @@
-- name: Delete Virtual Machine {{ az_virtual_machine }}
+- name: Delete Virtual Machine {{ virtual_machine }}
   azure.azcollection.azure_rm_virtualmachine:
-    name: "{{ az_virtual_machine }}"
+    name: "{{ virtual_machine }}"
     resource_group: "{{ az_resource_group }}"
     remove_on_absent: all
     state: absent

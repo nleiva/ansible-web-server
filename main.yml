@@ -1,0 +1,32 @@
+- name: Create {{ cloud_provider }} Resources
+  hosts: localhost
+  connection: local
+  gather_facts: yes
+  vars_files:
+    - ./vars/common.yml
+    - ./vars/vms.yml
+
+  roles:
+      - { role: check_vars }
+      - { role: install_dependencies, when: dependencies_check }
+
+  tasks:
+    - name: Include cloud variables
+      ansible.builtin.include_vars: "./vars/{{ cloud_provider }}_general.yml"
+
+    - name: Create LB in Azure
+      ansible.builtin.include_role:
+        name: azure_create_lb
+      when: cloud_provider == 'azure'
+
+    - name: Loop over desired Virtual Machines (VMs)
+      ansible.builtin.include_tasks: "create_vm_{{ cloud_provider }}.yml"
+      loop: "{{ vms | dict2items }}"
+      loop_control:
+        loop_var: vm
+        extended: yes
+      when: not delete
+
+    - name: Include cloud-specific tasks to delete VMs
+      ansible.builtin.include_tasks: "delete_vm_{{ cloud_provider }}.yml"
+      when: delete

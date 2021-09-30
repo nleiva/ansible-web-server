@@ -1,4 +1,4 @@
-- name: Create Public Static IP for '{{ az_virtual_machine }}'
+- name: Create Public Static IP for '{{ virtual_machine }}'
   azure.azcollection.azure_rm_publicipaddress:
     name: "{{ az_public_ip }}"
     resource_group: "{{ az_resource_group }}"

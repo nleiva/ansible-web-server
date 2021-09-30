@@ -1,0 +1,31 @@
+- name: Check AZURE_SUBSCRIPTION_ID is defined as an environment variable
+  ansible.builtin.fail:
+    msg: "AZURE_SUBSCRIPTION_ID is not defined. Provide your Subscription ID with 'export AZURE_SUBSCRIPTION_ID=...'"
+  when:
+    - check == 'n/a'
+  vars:
+    check: "{{ lookup('env', 'AZURE_SUBSCRIPTION_ID') | default('n/a', True) }}"
+
+- name: Check AZURE_CLIENT_ID is defined as an environment variable
+  ansible.builtin.fail:
+    msg: "AZURE_CLIENT_ID is not defined. Provide your Client ID with 'export AZURE_CLIENT_ID=...'"
+  when:
+    - check == 'n/a'
+  vars:
+    check: "{{ lookup('env', 'AZURE_CLIENT_ID') | default('n/a', True) }}"
+
+- name: Check AZURE_SECRET is defined as an environment variable
+  ansible.builtin.fail:
+    msg: "AZURE_SECRET is not defined. Provide your Secret with 'export AZURE_SECRET=...'"
+  when:
+    - check == 'n/a'
+  vars:
+    check: "{{ lookup('env', 'AZURE_SECRET') | default('n/a', True) }}"
+
+- name: Check AZURE_TENANT is defined as an environment variable
+  ansible.builtin.fail:
+    msg: "AZURE_TENANT is not defined. Provide your Tenant with 'export AZURE_TENANT=...'"
+  when:
+    - check == 'n/a'
+  vars:
+    check: "{{ lookup('env', 'AZURE_TENANT') | default('n/a', True) }}"
