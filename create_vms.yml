@@ -19,11 +19,11 @@
 - name: Add instance {{ vm.key }} to my_instances group
   ansible.builtin.add_host:
     name: "{{ virtual_machine }}"
-    ansible_host: "{{ create_pub_ip.state.ip_address }}"
+    ansible_host: "{{ pub_ip }}"
     ansible_user: "{{ vm_username }}"
-    ansible_ssh_private_key_file: "{{ ssh_private_key }}"
+    ansible_ssh_private_key_file: "{{ ssh_key }}"
     instance_name: "{{ virtual_machine }}"
-    cloud: "{{ cloud_provider | capitalize }}"
+    cloud: "{{ cloud_provider | upper }}"
     groups:
       - my_instances
   no_log: True

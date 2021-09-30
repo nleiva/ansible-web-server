@@ -1,0 +1,17 @@
+- name: Provision EC2 instances
+  amazon.aws.ec2_instance:
+    name: "{{ virtual_machine }}"
+    region: "{{ ec2_region }}"
+    instance_type: "{{ ec2_instance_type }}"
+    image_id: "{{ ec2_ami_id | trim }}"
+    key_name: "{{ ec2_resource_prefix }}-key"
+    vpc_subnet_id: "{{ create_subnet.subnet.id }}"
+    network:
+      assign_public_ip: true
+    security_group: "{{ ec2_resource_prefix }}-insecure-SG"
+    wait: yes
+    volumes: "{{ ec2_volume }}"
+    tags:
+      Environment: "{{ ec2_environment }}"
+      Contact: "{{ ec2_contact_tag }}"
+  register: ec2

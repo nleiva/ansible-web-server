@@ -17,16 +17,47 @@
     - name: Create LB in Azure
       ansible.builtin.include_role:
         name: azure_create_lb
-      when: cloud_provider == 'azure'
+      when:
+      - cloud_provider == 'azure'
+      - not delete
 
     - name: Loop over desired Virtual Machines (VMs)
-      ansible.builtin.include_tasks: "create_vm_{{ cloud_provider }}.yml"
+      ansible.builtin.include_tasks: "create_vms.yml"
       loop: "{{ vms | dict2items }}"
       loop_control:
         loop_var: vm
         extended: yes
       when: not delete
 
-    - name: Include cloud-specific tasks to delete VMs
-      ansible.builtin.include_tasks: "delete_vm_{{ cloud_provider }}.yml"
+    - name: Delete {{ cloud_provider }} VMs
+      block:
+      - name: Save number of Virtual Machines (VMs) to delete
+        set_fact:
+          len: "{{ vms | length }}"
+
+      - name: Loop over deployed VMs
+        ansible.builtin.include_tasks: "delete_vms.yml"
+        loop: "{{ vms | dict2items }}"
+        loop_control:
+          loop_var: vm
+          extended: yes
       when: delete
+
+# Play 2: Configure the instance(s) we create
+- name: Configure Instance
+  hosts: "my_instances"
+  gather_facts: true
+
+  pre_tasks:
+    - name: Gather instance data
+      block:
+      - name: Include distribution specific variables
+        ansible.builtin.include_vars: "./vars/os_{{ ansible_distribution | lower }}.yml"
+
+      - name: Display variables/facts known for instance
+        ansible.builtin.debug:
+          msg: "Running {{ ansible_distribution }} {{ ansible_distribution_version }} ({{ ansible_os_family }}), IP address: {{ ansible_host }}"
+      when: not delete
+
+  roles:
+      - { role: configure_instance, become: true, when: not delete }
