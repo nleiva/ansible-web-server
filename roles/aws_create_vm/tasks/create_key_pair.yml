@@ -17,29 +17,37 @@
     region: "{{ ec2_region }}"
   register: create_key
 
-- name: Save Private Key locally
-  ansible.builtin.copy:
-    content: "{{ create_key.key.private_key }}"
-    dest: "{{ playbook_dir }}/{{ ec2_resource_prefix }}-private.pem"
-    mode: '0400'
+- name: Save Private Key
+  block: 
+  - name: Save Private Key locally
+    ansible.builtin.copy:
+      content: "{{ create_key.key.private_key }}"
+      dest: "{{ playbook_dir }}/{{ ec2_resource_prefix }}-private.pem"
+      mode: '0400'
+
+  - name: Store Private Key in S3
+    amazon.aws.aws_s3:
+      bucket: "{{ ec2_resource_prefix|lower }}.{{ s3_identifier|lower }}.private"
+      mode: put
+      object: "{{ ec2_resource_prefix }}-private.pem"
+      src: "{{ playbook_dir }}/{{ ec2_resource_prefix }}-private.pem"
+      encrypt: true
+      region: "{{ ec2_region }}"
   when: create_key.changed
 
-- name: Store Private Key in S3
-  amazon.aws.aws_s3:
-    bucket: "{{ ec2_resource_prefix|lower }}.{{ s3_identifier|lower }}.private"
-    mode: put
-    object: "{{ ec2_resource_prefix }}-private.pem"
-    src: "{{ playbook_dir }}/{{ ec2_resource_prefix }}-private.pem"
-    encrypt: true
-    region: "{{ ec2_region }}"
-  when: create_key.changed
+- name: Get Private Key
+  block: 
+  - name: Save Private key from S3 Bucket when not generating it
+    amazon.aws.aws_s3:
+      bucket: "{{ ec2_resource_prefix|lower }}.{{ s3_identifier|lower }}.private"
+      mode: get
+      object: "{{ ec2_resource_prefix }}-private.pem"
+      dest: "{{ playbook_dir }}/{{ ec2_resource_prefix }}-private.pem"
+      encrypt: true
+      region: "{{ ec2_region }}"
 
-- name: Save Private key from S3 Bucket when not generating it
-  amazon.aws.aws_s3:
-    bucket: "{{ ec2_resource_prefix|lower }}.{{ s3_identifier|lower }}.private"
-    mode: get
-    object: "{{ ec2_resource_prefix }}-private.pem"
-    dest: "{{ playbook_dir }}/{{ ec2_resource_prefix }}-private.pem"
-    encrypt: true
-    region: "{{ ec2_region }}"
+  - name: Change Private key permissions
+    ansible.builtin.file:
+      path: "{{ playbook_dir }}/{{ ec2_resource_prefix }}-private.pem"
+      mode: '0400'
   when: not create_key.changed
