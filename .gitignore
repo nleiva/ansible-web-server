@@ -4,3 +4,4 @@ start.sh
 .outputs
 test.yml
 test_tasks.yml
+*.pem
