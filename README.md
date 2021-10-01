@@ -92,16 +92,21 @@ And run it.
 
 You can alternatively run this with [ansible-navigator](https://github.com/ansible/ansible-navigator#installing).
 
+### EE Create Web Server
+
 ```bash
 ansible-navigator run main.yml
 ```
-### EE Create Web Server
 
 <p align="center">
-<img src="./pictures/navigator_create_config.png">
+<img src="./pictures/navigator_create.png">
 </p>
 
 ### EE Delete Web Server
+
+```bash
+ansible-navigator run main.yml -e "delete=true"
+```
 
 <p align="center">
 <img src="./pictures/navigator_delete.png">

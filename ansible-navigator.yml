@@ -21,7 +21,12 @@ ansible-navigator:
         - AZURE_CLIENT_ID
         - AZURE_SECRET
         - AZURE_TENANT
-    image: quay.io/nleiva/ee-cloud-image
+        - AWS_ACCESS_KEY_ID
+        - AWS_SECRET_ACCESS_KEY
+        - GCP_PROJECT
+        - GCP_AUTH_KIND
+        - GCP_SERVICE_ACCOUNT_FILE
+    image: quay.io/nleiva/ee-web-image
 
   playbook-artifact:
     enable: False

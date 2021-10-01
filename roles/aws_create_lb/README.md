@@ -1,5 +1,5 @@
-AWS Create EC2 
-==============
+AWS Create LB
+=============
 
 A brief description of the role goes here.
 
@@ -12,7 +12,6 @@ The boto package is required.
 pip3 install boto3
 ```
 
-
 Role Variables
 --------------
 
@@ -20,26 +19,22 @@ A description of the settable variables for this role should go here, including 
 
 We need to export `AWS_ACCESS_KEY` and `AWS_SECRET_KEY` before executing.
 
+
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+None.
 
 Example Playbook
 ----------------
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: servers
+    - hosts: localhost
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: ansible-webserver-azure.azure_create_lb }
 
 License
 -------
 
 BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).

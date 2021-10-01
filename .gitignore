@@ -1,5 +1,6 @@
-start.sh
 ansible-navigator.log
+context
+start.sh
 .outputs
 test.yml
 test_tasks.yml

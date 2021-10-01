@@ -1,0 +1,27 @@
+- name: create ELB
+  amazon.aws.ec2_elb_lb:
+    region: "{{ ec2_region }}"
+    name: "{{ ec2_resource_prefix }}-elb"
+    state: present
+    scheme: internet-facing
+    security_group_names: "{{ ec2_resource_prefix }}-insecure-SG"
+    subnets:
+      - "{{ create_subnet.subnet.id }}"
+    instance_ids: "{{ aws_instances }}"
+    validate_certs: no
+    listeners:
+      - protocol: http
+        load_balancer_port: 80
+        instance_port: 80
+        proxy_protocol: True
+    tags:
+      Environment: "{{ ec2_environment }}"
+  register: create_elb
+
+- name: print ELB DNS Record
+  debug:
+    msg: "ELB DNS: {{ create_elb.elb.dns_name }}"
+
+- name: set fact with elb dns
+  set_fact:
+    elb_dns: "{{ create_elb.elb.dns_name }}"

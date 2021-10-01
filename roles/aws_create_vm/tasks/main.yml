@@ -30,6 +30,16 @@
   ansible.builtin.set_fact:
     pub_ip: "{{ ec2[0].public_ip_address }}"
 
+- name: DNS for EC2 instance
+  community.aws.route53:
+    state: present
+    zone: "{{ dns_zone }}"
+    record: "{{ virtual_machine }}.{{ dns_zone }}"
+    type: A
+    overwrite: true
+    value: "{{ pub_ip }}"
+  when: dns_zone is defined and dns_zone != ""
+
 - name: Save private SSH Key
   ansible.builtin.set_fact:
     ssh_key: "{{ playbook_dir }}/{{ ec2_resource_prefix }}-private.pem"

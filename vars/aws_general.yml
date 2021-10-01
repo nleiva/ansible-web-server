@@ -7,6 +7,10 @@ ec2_instance_type: "{{ instance_type | default('t2.medium') }}"
 ec2_cidr_block: "172.18.0.0/16"
 ec2_subnet: "172.18.0.0/24"
 
+dns_zone: "{{ domain | default('') }}"
+
+aws_instances: []
+
 volume:
   - device_name: /dev/sda1
     volume_type: gp2
