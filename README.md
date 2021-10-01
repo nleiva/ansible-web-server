@@ -38,7 +38,7 @@ vms:
   2: ubuntu
 ```
 
-4. Put all these pieces together in a Job Template pointing to [create_resources.yml](create_resources.yml).
+4. Put all these pieces together in a Job Template pointing to [main.yml](main.yml).
 
 <p align="center">
 <img src="./pictures/tower_create_job.png">
@@ -76,7 +76,7 @@ This URL will take you to one of the backend VM's. For example:
 
 ## Deleting the resources
 
-You can create a similar Job Template pointing to [delete_resources.yml](delete_resources.yml) instead.
+You can create a similar Job Template pointing to [main.yml](main.yml) and pass an extra-var `delete=true`.
 
 <p align="center">
 <img src="./pictures/tower_delete_job.png">
@@ -93,7 +93,7 @@ And run it.
 You can alternatively run this with [ansible-navigator](https://github.com/ansible/ansible-navigator#installing).
 
 ```bash
-ansible-navigator run create_resources.yml
+ansible-navigator run main.yml
 ```
 ### EE Create Web Server
 

@@ -47,6 +47,8 @@
 - name: Configure Instance
   hosts: "my_instances"
   gather_facts: true
+  vars_files:
+    - ./vars/common.yml
 
   pre_tasks:
     - name: Gather instance data
