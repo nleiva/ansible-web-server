@@ -22,13 +22,17 @@
 - name: Provision EC2 Instance
   include_tasks: create_ec2_instance.yml
 
+- name: Save VM username
+  ansible.builtin.set_fact:
+    vm_username: "{{ ec2_username }}"
+
 - name: Save access details
   ansible.builtin.set_fact:
-    ssh_info: "ssh -i {{ ec2_resource_prefix }}-private.pem {{ ec2_username }}@{{ ec2[0].public_dns_name }}"
+    ssh_info: "ssh -i {{ ec2_resource_prefix }}-private.pem {{ ec2_username }}@{{ ec2.instances[0].public_dns_name }}"
 
 - name: Save public IP address
   ansible.builtin.set_fact:
-    pub_ip: "{{ ec2[0].public_ip_address }}"
+    pub_ip: "{{ ec2.instances[0].public_ip_address }}"
 
 - name: DNS for EC2 instance
   community.aws.route53:
