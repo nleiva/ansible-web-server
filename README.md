@@ -102,6 +102,12 @@ ansible-navigator run main.yml
 <img src="./pictures/navigator_create.png">
 </p>
 
+#### EE Create Web Server in another cloud provider with custom domain
+
+```bash
+ansible-navigator run main.yml -e "cloud=aws dns_zone=sandbox760.opentlc.com"
+```
+
 ### EE Delete Web Server
 
 ```bash

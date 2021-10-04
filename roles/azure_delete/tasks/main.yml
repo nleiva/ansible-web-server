@@ -1,5 +1,6 @@
 - name: Delete Load Balancer
   ansible.builtin.include_tasks: delete_lb.yml
+  when: first
 
 - name: Delete VM
   ansible.builtin.include_tasks: delete_vm.yml

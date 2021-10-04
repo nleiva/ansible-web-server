@@ -18,10 +18,20 @@
       Environment: "{{ ec2_environment }}"
   register: create_elb
 
-- name: print ELB DNS Record
+- name: Print ELB DNS Record
   debug:
     msg: "ELB DNS: {{ create_elb.elb.dns_name }}"
 
 - name: set fact with elb dns
   set_fact:
     elb_dns: "{{ create_elb.elb.dns_name }}"
+
+- name: DNS for ELB
+  community.aws.route53:
+    state: present
+    zone: "{{ dns_zone }}"
+    record: "{{ ec2_resource_prefix }}.{{ dns_zone }}"
+    type: CNAME
+    overwrite: true
+    value: "{{ elb_dns }}"
+  when: dns_zone is defined and dns_zone != ""

@@ -1,0 +1,8 @@
+- name: Delete EC2 instance
+  community.aws.ec2_instance:
+    region: "{{ ec2_region }}"
+    state: absent
+    filters:
+      instance-state-name: running
+      "tag:Name": "{{ virtual_machine }}"
+      "tag:Environment": "{{ ec2_environment }}"
