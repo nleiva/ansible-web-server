@@ -10,11 +10,11 @@ ansible-navigator:
     console: false
 
   logging:
-    level: critical
+    level: warning
 
   execution-environment:
     container-engine: podman
-    enabled: False
+    enabled: True
     environment-variables:
       pass:
         - AZURE_SUBSCRIPTION_ID
@@ -30,3 +30,5 @@ ansible-navigator:
 
   playbook-artifact:
     enable: False
+  
+  mode: stdout
