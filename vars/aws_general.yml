@@ -13,6 +13,7 @@ aws_instances: []
 
 volume:
   - device_name: /dev/sda1
-    volume_type: gp2
-    volume_size: 30
-    delete_on_termination: true
+    ebs:
+      volume_type: gp2
+      volume_size: 30
+      delete_on_termination: true

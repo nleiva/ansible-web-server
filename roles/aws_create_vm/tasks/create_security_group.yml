@@ -1,4 +1,4 @@
-- name: Create EC2 security for router interconnection (NETWORK MODE)
+- name: Create EC2 security for router interconnection
   amazon.aws.ec2_group:
     name: "{{ ec2_resource_prefix }}-insecure-SG"
     description: Security Group for router interconnection
@@ -7,10 +7,6 @@
     tags:
       Environment: "{{ ec2_environment }}"
     rules:
-      - proto: 47
-        to_port: -1
-        from_port: -1
-        cidr_ip: 0.0.0.0/0
       - proto: tcp
         to_port: 443
         from_port: 443
@@ -26,18 +22,6 @@
       - proto: tcp
         to_port: 22
         from_port: 22
-        cidr_ip: 0.0.0.0/0
-      - proto: tcp
-        to_port: 8443
-        from_port: 8443
-        cidr_ip: 0.0.0.0/0
-      - proto: tcp
-        to_port: 830
-        from_port: 830
-        cidr_ip: 0.0.0.0/0
-      - proto: tcp
-        to_port: 179
-        from_port: 179
         cidr_ip: 0.0.0.0/0
     rules_egress:
       - proto: all

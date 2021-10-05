@@ -1,5 +1,5 @@
 - name: Provision EC2 instances
-  community.aws.ec2_instance:
+  amazon.aws.ec2_instance:
     name: "{{ virtual_machine }}"
     region: "{{ ec2_region }}"
     instance_type: "{{ ec2_instance_type }}"
@@ -10,7 +10,7 @@
       assign_public_ip: true
     security_group: "{{ ec2_resource_prefix }}-insecure-SG"
     wait: yes
-    #volumes: "{{ ec2_volume }}"
+    volumes: "{{ ec2_volume }}"
     tags:
       Environment: "{{ ec2_environment }}"
   register: ec2

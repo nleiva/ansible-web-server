@@ -34,5 +34,5 @@ export AWS_SECRET_ACCESS_KEY='...'
 3. Run it.
 
 ```bash
-ansible-navigator run main.yml -e "cloud=aws dns_zone=sandbox760.opentlc.com"
+ansible-navigator run main.yml -e cloud=aws -e dns_zone=sandbox760.opentlc.com -e aws_s3=random
 ```

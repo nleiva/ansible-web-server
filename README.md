@@ -92,6 +92,10 @@ And run it.
 
 You can alternatively run this with [ansible-navigator](https://github.com/ansible/ansible-navigator#installing).
 
+```bash
+pip3 install 'ansible-navigator[ansible-core]'
+```
+
 ### EE Create Web Server
 
 ```bash
@@ -105,13 +109,13 @@ ansible-navigator run main.yml
 #### EE Create Web Server in another cloud provider with custom domain
 
 ```bash
-ansible-navigator run main.yml -e "cloud=aws dns_zone=sandbox760.opentlc.com"
+ansible-navigator run main.yml -e cloud=aws -e dns_zone=sandbox760.opentlc.com
 ```
 
 ### EE Delete Web Server
 
 ```bash
-ansible-navigator run main.yml -e "delete=true"
+ansible-navigator run main.yml -e delete=true
 ```
 
 <p align="center">

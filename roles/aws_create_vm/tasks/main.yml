@@ -24,7 +24,7 @@
 
 - name: Save VM username
   ansible.builtin.set_fact:
-    vm_username: "{{ ec2_username }}"
+    vm_username: "{{ ec2_username }}" 
 
 - name: Save access details
   ansible.builtin.set_fact:
@@ -33,6 +33,25 @@
 - name: Save public IP address
   ansible.builtin.set_fact:
     pub_ip: "{{ ec2.instances[0].public_ip_address }}"
+  register: got_ip
+  ignore_errors: yes
+
+- name: Try to get the IP again
+  block:
+  - name: Get EC2 info
+    amazon.aws.ec2_instance_info:
+      region: "{{ ec2_region }}"
+      filters:
+        "tag:Name": "{{ virtual_machine }}"
+        "tag:Environment": "{{ ec2_environment }}"
+        # 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped)
+        instance-state-code: [ "0", "16" ]
+    register: ec2
+
+  - name: Save public IP address - second try
+    ansible.builtin.set_fact:
+      pub_ip: "{{ ec2.instances[0].public_ip_address }}"
+  when: got_ip.failed
 
 - name: DNS for EC2 instance
   community.aws.route53:
@@ -49,9 +68,8 @@
     ssh_key: "{{ playbook_dir }}/{{ ec2_resource_prefix }}-private.pem"
   no_log: True
 
-- name: Wait until we can SSH to the last instance
+- name: Wait until we can SSH to the instance
   ansible.builtin.wait_for:
     host: "{{ pub_ip }}"
     port: 22
     state: started
-  when: last
