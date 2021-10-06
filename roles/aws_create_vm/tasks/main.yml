@@ -33,7 +33,13 @@
 - name: Save public IP address  - First try
   ansible.builtin.set_fact:
     pub_ip: "{{ ec2.instances[0].public_ip_address }}"
+  register: got_ip
   ignore_errors: yes
+
+- name: Wait for 5 seconds if AWS didn't return the public IP address
+  ansible.builtin.wait_for:
+    timeout: 5
+  when: got_ip.failed
 
 - name: Get EC2 info (to give it time to get the public IP address)
   amazon.aws.ec2_instance_info:
