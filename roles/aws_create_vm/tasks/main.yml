@@ -30,28 +30,25 @@
   ansible.builtin.set_fact:
     ssh_info: "ssh -i {{ ec2_resource_prefix }}-private.pem {{ ec2_username }}@{{ ec2.instances[0].public_dns_name }}"
 
-- name: Save public IP address
+- name: Save public IP address  - First try
   ansible.builtin.set_fact:
     pub_ip: "{{ ec2.instances[0].public_ip_address }}"
-  register: got_ip
   ignore_errors: yes
 
-- name: Try to get the IP again
-  block:
-  - name: Get EC2 info
-    amazon.aws.ec2_instance_info:
-      region: "{{ ec2_region }}"
-      filters:
-        "tag:Name": "{{ virtual_machine }}"
-        "tag:Environment": "{{ ec2_environment }}"
-        # 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped)
-        instance-state-code: [ "0", "16" ]
-    register: ec2
+- name: Get EC2 info (to give it time to get the public IP address)
+  amazon.aws.ec2_instance_info:
+    region: "{{ ec2_region }}"
+    filters:
+      "tag:Name": "{{ virtual_machine }}"
+      "tag:Environment": "{{ ec2_environment }}"
+      # 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped)
+      instance-state-code: [ "0", "16" ]
+  register: ec2
 
-  - name: Save public IP address - second try
-    ansible.builtin.set_fact:
-      pub_ip: "{{ ec2.instances[0].public_ip_address }}"
-  when: got_ip.failed
+- name: Save public IP address - Second try
+  ansible.builtin.set_fact:
+    pub_ip: "{{ ec2.instances[0].public_ip_address }}"
+  ignore_errors: yes
 
 - name: DNS for EC2 instance
   community.aws.route53:
