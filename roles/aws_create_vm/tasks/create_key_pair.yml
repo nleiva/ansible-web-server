@@ -18,7 +18,7 @@
   register: create_key
 
 - name: Save Private Key
-  block: 
+  block:
   - name: Save Private Key locally
     ansible.builtin.copy:
       content: "{{ create_key.key.private_key }}"
@@ -36,7 +36,7 @@
   when: create_key.changed
 
 - name: Get Private Key
-  block: 
+  block:
   - name: Save Private key from S3 Bucket when not generating it
     amazon.aws.aws_s3:
       bucket: "{{ ec2_resource_prefix|lower }}.{{ s3_identifier|lower }}.private"
