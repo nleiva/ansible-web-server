@@ -32,11 +32,6 @@
   ansible.builtin.set_fact:
     pub_ip: "{{ create_pub_ip.state.ip_address }}"
 
-- name: Save private SSH Key
-  ansible.builtin.set_fact:
-    ssh_key: "{{ ssh_private_key }}"
-  no_log: True
-
 - name: Wait until we can SSH to the last instance
   ansible.builtin.wait_for:
     host: "{{ create_pub_ip.state.ip_address }}"
