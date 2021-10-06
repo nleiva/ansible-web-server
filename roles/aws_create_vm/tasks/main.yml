@@ -60,11 +60,6 @@
     value: "{{ pub_ip }}"
   when: dns_zone is defined and dns_zone != ""
 
-- name: Save private SSH Key
-  ansible.builtin.set_fact:
-    ssh_key: "{{ playbook_dir }}/{{ ec2_resource_prefix }}-private.pem"
-  no_log: True
-
 - name: Wait until we can SSH to the instance
   ansible.builtin.wait_for:
     host: "{{ pub_ip }}"
