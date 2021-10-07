@@ -1,21 +1,9 @@
 # AWS
 
-## Requirements
-
-### Python libraries
-
-As we will interact with AWS, we need a couple of Python libraries to be present in the system.
+You need to install [ansible-navigator](https://github.com/ansible/ansible-navigator#installing).
 
 ```bash
-pip install --user -r requirements_aws.txt
-```
-
-### Ansible Collections
-
-We will also need the Ansible [Amazon AWS Collection](https://github.com/ansible-collections/amazon.aws#amazon-aws-collection).
-
-```bash
-ansible-galaxy collection install -r collections/requirements.yml
+pip3 install 'ansible-navigator[ansible-core]'
 ```
 
 ## Launching the Web App
@@ -31,8 +19,17 @@ export AWS_ACCESS_KEY_ID='...'
 export AWS_SECRET_ACCESS_KEY='...'
 ```
 
-3. Run it.
+3. Select AWS as the cloud option (`cloud`) and your domain name (`dns_zone`) if you want to create Route53 entries (optional). Run it.
 
 ```bash
-ansible-navigator run main.yml -e cloud=aws -e dns_zone=sandbox760.opentlc.com -e aws_s3=random
+ansible-navigator run main.yml -e cloud=aws -e dns_zone=sandbox760.opentlc.com
 ```
+
+## Deleting the App
+
+```bash
+ansible-navigator run main.yml -e cloud=aws -e delete=true
+```
+
+**Note**: I use [podman](https://podman.io/) as my container engine (`container-engine`). You can change to another alternative in the ansible [navigator config file](ansible-navigator.yml).
+

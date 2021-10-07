@@ -14,7 +14,9 @@ ansible-navigator:
 
   execution-environment:
     container-engine: podman
-    enabled: True
+    enabled: true
+    pull-policy: missing
+    image: quay.io/nleiva/ee-web-image
     environment-variables:
       pass:
         - AZURE_SUBSCRIPTION_ID
@@ -27,7 +29,6 @@ ansible-navigator:
         - GCP_PROJECT
         - GCP_AUTH_KIND
         - GCP_SERVICE_ACCOUNT_FILE
-    image: quay.io/nleiva/ee-web-image
 
   playbook-artifact:
     enable: False
