@@ -25,6 +25,8 @@ export AWS_SECRET_ACCESS_KEY='...'
 ansible-navigator run main.yml -e cloud=aws -e dns_zone=sandbox760.opentlc.com
 ```
 
+4. Navigate to http://testbed.dns_zone
+
 ## Deleting the App
 
 ```bash

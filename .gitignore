@@ -5,3 +5,4 @@ start.sh
 test.yml
 test_tasks.yml
 *.pem
+AnsiballZ*
