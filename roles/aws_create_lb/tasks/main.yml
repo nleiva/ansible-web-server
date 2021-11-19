@@ -1,5 +1,5 @@
 - name: Create ELB
-  amazon.aws.ec2_elb_lb:
+  amazon.aws.elb_classic_lb:
     region: "{{ ec2_region }}"
     name: "{{ ec2_resource_prefix }}-elb"
     state: present
@@ -8,7 +8,7 @@
     subnets:
       - "{{ create_subnet.subnet.id }}"
     instance_ids: "{{ aws_instances }}"
-    validate_certs: no
+    #validate_certs: no
     listeners:
       - protocol: http
         load_balancer_port: 80

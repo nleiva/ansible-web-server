@@ -1,5 +1,5 @@
 - name: Delete ELB
-  amazon.aws.ec2_elb_lb:
+  amazon.aws.elb_classic_lb:
     region: "{{ ec2_region }}"
     name: "{{ ec2_resource_prefix }}-elb"
     state: absent
