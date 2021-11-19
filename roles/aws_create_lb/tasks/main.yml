@@ -4,8 +4,7 @@
     region: "{{ ec2_region }}"
     state: present
     security_group_names: "{{ ec2_resource_prefix }}-insecure-SG"
-    subnets:
-      - "{{ create_subnet.subnet.id }}"
+    subnets: "{{ create_subnet.subnet.id }}"
     instance_ids: "{{ aws_instances }}"
     listeners:
       - protocol: http
