@@ -1,19 +1,19 @@
 - name: Create ELB
   amazon.aws.elb_classic_lb:
-    region: "{{ ec2_region }}"
     name: "{{ ec2_resource_prefix }}-elb"
+    region: "{{ ec2_region }}"
     state: present
-    scheme: internet-facing
     security_group_names: "{{ ec2_resource_prefix }}-insecure-SG"
     subnets:
       - "{{ create_subnet.subnet.id }}"
     instance_ids: "{{ aws_instances }}"
-    #validate_certs: no
     listeners:
       - protocol: http
         load_balancer_port: 80
         instance_port: 80
         proxy_protocol: True
+    stickiness:
+      enabled: no
     tags:
       Environment: "{{ ec2_environment }}"
   register: create_elb
