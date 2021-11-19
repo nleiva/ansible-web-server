@@ -19,11 +19,11 @@
   register: create_elb
 
 - name: Print ELB DNS Record
-  debug:
+  ansible.builtin.debug:
     msg: "ELB DNS: {{ create_elb.elb.dns_name }}"
 
 - name: set fact with elb dns
-  set_fact:
+  ansible.builtin.set_fact:
     elb_dns: "{{ create_elb.elb.dns_name }}"
 
 - name: DNS for ELB
