@@ -36,7 +36,8 @@
       instance-state-code: [ "0", "16" ]
   register: ec2
   until: ec2.instances[0].public_ip_address is defined
-  retries: 5
+  retries: 30
+  delay: 10
 
 - name: Save public IP address
   ansible.builtin.set_fact:
