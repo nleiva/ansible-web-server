@@ -26,5 +26,7 @@ jobs:
         uses: nleiva/ansible-lint-action@master
         with:
           targets: "*.yml"
+          override-deps: |
+             rich>=9.5.1,<11.0.0
           # Avoid annoying 'File permissions not mentioned'  
           args: "-x 208"
