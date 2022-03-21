@@ -25,4 +25,4 @@ jobs:
       - name: Lint Ansible Playbook
         uses: ansible/ansible-lint-action@v6.0.1
         with:  
-          args: "-w unpredictability,security"
+          args: "-w security,unpredictability"
