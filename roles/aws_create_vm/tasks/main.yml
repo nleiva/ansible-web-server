@@ -24,7 +24,7 @@
 
 - name: Save VM username
   ansible.builtin.set_fact:
-    vm_username: "{{ ec2_username }}" 
+    vm_username: "{{ ec2_username }}"
 
 - name: Get EC2 info (and retry to give it time to get the public IP address)
   amazon.aws.ec2_instance_info:
@@ -33,7 +33,7 @@
       "tag:Name": "{{ virtual_machine }}"
       "tag:Environment": "{{ ec2_environment }}"
       # 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped)
-      instance-state-code: [ "0", "16" ]
+      instance-state-code: ["0", "16"]
   register: ec2
   until: ec2.instances[0].public_ip_address is defined
   retries: 30
@@ -42,7 +42,7 @@
 - name: Save public IP address
   ansible.builtin.set_fact:
     pub_ip: "{{ ec2.instances[0].public_ip_address }}"
-  ignore_errors: yes
+  ignore_errors: true
 
 - name: Save access details
   ansible.builtin.set_fact:

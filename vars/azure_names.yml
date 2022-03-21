@@ -4,4 +4,3 @@ az_public_ip: "{{ az_prefix }}-pubip{{ vm.key }}"
 az_network_interface: "{{ az_prefix }}-netint{{ vm.key }}"
 az_ip_config: "{{ az_prefix }}-ipconf{{ vm.key }}"
 # az_storage_account: "{{ az_prefix }}storage{{ 1000 |random }}{{ vm.key }}"
-

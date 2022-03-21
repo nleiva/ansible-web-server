@@ -5,11 +5,11 @@
   ansible.builtin.include_vars: "./vars/os_{{ vm.value }}.yml"
 
 - name: Determine if this is the first VM
-  set_fact:
+  ansible.builtin.set_fact:
     first: "{{ ansible_loop.first }}"
 
 - name: Determine if this is the last VM
-  set_fact:
+  ansible.builtin.set_fact:
     last: "{{ ansible_loop.last }}"
 
 - name: Create {{ vm.value }} VM in {{ cloud_provider }}
@@ -26,4 +26,4 @@
     cloud_name: "{{ cloud_provider | upper }}"
     groups:
       - my_instances
-  no_log: True
+  no_log: true

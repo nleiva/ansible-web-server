@@ -3,7 +3,6 @@
     name: "{{ ec2_resource_prefix }}-elb"
     region: "{{ ec2_region }}"
     state: present
-    #security_group_names: "{{ ec2_resource_prefix }}-insecure-SG"
     security_group_ids: "{{ create_sg.group_id }}"
     subnets: "{{ create_subnet.subnet.id }}"
     instance_ids: "{{ aws_instances }}"
@@ -11,9 +10,9 @@
       - protocol: http
         load_balancer_port: 80
         instance_port: 80
-        proxy_protocol: True
+        proxy_protocol: true
     stickiness:
-      enabled: no
+      enabled: false
     tags:
       Environment: "{{ ec2_environment }}"
   register: create_elb

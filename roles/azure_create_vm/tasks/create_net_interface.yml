@@ -6,9 +6,9 @@
     subnet: "{{ az_subnet }}"
     ip_configurations:
       - name: "{{ az_ip_config }}"
-        public_ip_address_name:  "{{ az_public_ip }}"
+        public_ip_address_name: "{{ az_public_ip }}"
         public_ip_allocation_method: Static
-        primary: yes
+        primary: true
         load_balancer_backend_address_pools:
           - name: "{{ az_backend_pool }}"
             load_balancer: "{{ az_load_balancer }}"

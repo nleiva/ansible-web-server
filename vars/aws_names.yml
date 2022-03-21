@@ -1,3 +1,2 @@
 # AWS variable resource names
 virtual_machine: "{{ ec2_resource_prefix }}-vm{{ vm.key }}"
-

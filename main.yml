@@ -1,14 +1,14 @@
 - name: Create {{ cloud_provider }} Resources
   hosts: localhost
   connection: local
-  gather_facts: yes
+  gather_facts: true
   vars_files:
     - ./vars/common.yml
     - ./vars/vms.yml
 
   roles:
-      - { role: check_vars }
-      - { role: install_dependencies, when: dependencies_check }
+      - {role: check_vars}
+      - {role: install_dependencies, when: dependencies_check}
 
   tasks:
     - name: Include cloud variables
@@ -18,36 +18,36 @@
       ansible.builtin.include_role:
         name: azure_create_lb
       when:
-      - cloud_provider == 'azure'
-      - not delete
+        - cloud_provider == 'azure'
+        - not delete
 
     - name: Loop over desired Virtual Machines (VMs)
       ansible.builtin.include_tasks: "create_vms.yml"
       loop: "{{ vms | dict2items }}"
       loop_control:
         loop_var: vm
-        extended: yes
+        extended: true
       when: not delete
 
     - name: Create LB in AWS
       ansible.builtin.include_role:
         name: aws_create_lb
       when:
-      - cloud_provider == 'aws'
-      - not delete
+        - cloud_provider == 'aws'
+        - not delete
 
     - name: Delete {{ cloud_provider }} VMs
       block:
-      - name: Save number of Virtual Machines (VMs) to delete
-        set_fact:
-          len: "{{ vms | length }}"
+        - name: Save number of Virtual Machines (VMs) to delete
+          set_fact:
+            len: "{{ vms | length }}"
 
-      - name: Loop over deployed VMs
-        ansible.builtin.include_tasks: "delete_vms.yml"
-        loop: "{{ vms | dict2items }}"
-        loop_control:
-          loop_var: vm
-          extended: yes
+        - name: Loop over deployed VMs
+          ansible.builtin.include_tasks: "delete_vms.yml"
+          loop: "{{ vms | dict2items }}"
+          loop_control:
+            loop_var: vm
+            extended: true
       when: delete
 
 # Play 2: Configure the instance(s) we create
@@ -60,13 +60,13 @@
   pre_tasks:
     - name: Gather instance(s) data
       block:
-      - name: Include distribution specific variables
-        ansible.builtin.include_vars: "./vars/os_{{ ansible_distribution | lower }}.yml"
+        - name: Include distribution specific variables
+          ansible.builtin.include_vars: "./vars/os_{{ ansible_distribution | lower }}.yml"
 
-      - name: Display variables/facts known for instance
-        ansible.builtin.debug:
-          msg: "Running {{ ansible_distribution }} {{ ansible_distribution_version }} ({{ ansible_os_family }}), IP address: {{ ansible_host }}"
+        - name: Display variables/facts known for instance
+          ansible.builtin.debug:
+            msg: "Running {{ ansible_distribution }} {{ ansible_distribution_version }} ({{ ansible_os_family }}), IP address: {{ ansible_host }}"
       when: not delete
 
   roles:
-      - { role: configure_instance, become: true, when: not delete }
+    - {role: configure_instance, become: true, when: not delete}

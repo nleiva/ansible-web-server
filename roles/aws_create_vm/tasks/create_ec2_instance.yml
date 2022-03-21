@@ -9,7 +9,7 @@
     network:
       assign_public_ip: true
     security_group: "{{ ec2_resource_prefix }}-insecure-SG"
-    wait: yes
+    wait: true
     volumes: "{{ ec2_volume }}"
     tags:
       Environment: "{{ ec2_environment }}"
@@ -18,4 +18,4 @@
 - name: Keep list of all instance ids
   ansible.builtin.set_fact:
     aws_instances: "{{ aws_instances }} + [ '{{ ec2.instances[0].instance_id }}' ]"
-    cacheable: yes
+    cacheable: true

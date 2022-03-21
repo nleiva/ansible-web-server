@@ -23,7 +23,7 @@ base_software:
     - httpd
 
 python_libraries:
-- ipaddress
+  - ipaddress
 
 software_additional: []
 

@@ -4,7 +4,7 @@
   when: hostvars[inventory_hostname]['instance_name'] is defined
 
 - name: Install EPEL repo
-  package:
+  ansible.builtin.package:
     name: "{{ epel_repo }}"
     state: present
   register: result
@@ -14,8 +14,8 @@
   when: ansible_facts['distribution'] in epel_distro
 
 - name: Run the equivalent of "apt-get update" as a separate step for Ubuntu
-  apt:
-    update_cache: yes
+  ansible.builtin.apt:
+    update_cache: true
   when: ansible_distribution == 'Ubuntu'
 
 - name: Install base packages

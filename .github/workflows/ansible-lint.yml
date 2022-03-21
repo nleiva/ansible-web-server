@@ -24,6 +24,5 @@ jobs:
 
       - name: Lint Ansible Playbook
         uses: ansible/ansible-lint-action@v6.0.1
-        with:
-          # Avoid annoying 'File permissions not mentioned'  
-          args: "-x 208"
+        with:  
+          args: "-x unpredictability"

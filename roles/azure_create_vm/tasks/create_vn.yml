@@ -3,6 +3,6 @@
     name: "{{ az_virtual_network }}"
     resource_group: "{{ az_resource_group }}"
     address_prefixes_cidr:
-        - "{{ az_cidr_block }}"
+      - "{{ az_cidr_block }}"
     tags:
       Environment: "{{ az_prefix }}"

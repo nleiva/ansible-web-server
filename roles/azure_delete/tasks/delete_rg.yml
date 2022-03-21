@@ -3,4 +3,4 @@
     name: "{{ az_resource_group }}"
     location: "{{ az_location }}"
     state: absent
-    force_delete_nonempty: yes
+    force_delete_nonempty: true

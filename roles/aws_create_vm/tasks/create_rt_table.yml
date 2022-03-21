@@ -8,5 +8,5 @@
       - dest: 0.0.0.0/0
         gateway_id: "{{ igw.gateway_id }}"
     tags:
-      Environment: "{{ ec2_environment }}"    
+      Environment: "{{ ec2_environment }}"
       Name: "{{ ec2_resource_prefix }}-route-table"

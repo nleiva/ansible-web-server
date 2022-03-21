@@ -18,4 +18,4 @@
       sku: "{{ image_sku }}"
       version: "{{ image_version }}"
     tags:
-        Environment: "{{ az_prefix }}"
+      Environment: "{{ az_prefix }}"
