@@ -17,5 +17,5 @@
 
 - name: Keep list of all instance ids
   ansible.builtin.set_fact:
-    aws_instances: "{{ aws_instances }} + [ '{{ ec2.instances[0].instance_id }}' ]"
+    aws_instances: "{{ aws_instances  + union(['{{ ec2.instances[0].instance_id }}']) }}"
     cacheable: true
