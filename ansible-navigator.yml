@@ -15,7 +15,7 @@ ansible-navigator:
   execution-environment:
     container-engine: podman
     enabled: true
-    pull-policy: missing
+    # pull-policy: missing
     image: quay.io/nleiva/ee-web-image
     environment-variables:
       pass:
