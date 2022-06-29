@@ -2,8 +2,8 @@
 ansible-navigator:
   ansible:
     config: ansible.cfg
-    inventories:
-      - ./hosts
+    # inventories:
+    #  - ./hosts
 
   editor:
     command: code -g {filename}:{line_number}
@@ -16,7 +16,7 @@ ansible-navigator:
     container-engine: podman
     enabled: true
     # pull-policy: missing
-    image: quay.io/nleiva/ee-web-image
+    image: quay.io/nleiva/ee-web-image:latest
     environment-variables:
       pass:
         - AZURE_SUBSCRIPTION_ID
