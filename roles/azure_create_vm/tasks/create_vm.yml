@@ -4,8 +4,8 @@
     resource_group: "{{ az_resource_group }}"
     vm_size: "{{ az_vm_size }}"
     availability_set: "{{ az_availability_set }}"
-    # managed_disk_type: "{{ az_os_disk_type }}"
-    # storage_account_name: "{{ az_storage_account }}"
+    managed_disk_type: "{{ az_os_disk_type }}"
+    storage_account_name: "{{ az_storage_account }}"
     admin_username: "{{ vm_username }}"
     ssh_password_enabled: false
     ssh_public_keys:

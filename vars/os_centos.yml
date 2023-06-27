@@ -3,7 +3,7 @@ web_app: httpd
 
 image_offer: CentOS
 image_publisher: OpenLogic
-image_sku: 7.7
+image_sku: 8_5-gen2
 image_version: latest
 
 ec2_ami_id: ami-01ca03df4a6012157

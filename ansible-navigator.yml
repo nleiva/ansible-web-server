@@ -1,33 +1,31 @@
 ---
 ansible-navigator:
   ansible:
-    config: ansible.cfg
-
+    config:
+      path: ansible.cfg
   editor:
     command: code -g {filename}:{line_number}
     console: false
-
-  logging:
-    level: warning
-
   execution-environment:
     container-engine: podman
     enabled: true
-    image: quay.io/nleiva/ee-web-image
+    pull:
+      policy: missing
     environment-variables:
       pass:
-        - AZURE_SUBSCRIPTION_ID
-        - AZURE_CLIENT_ID
-        - AZURE_SECRET
-        - AZURE_TENANT
-        - USER
-        - AWS_ACCESS_KEY_ID
-        - AWS_SECRET_ACCESS_KEY
-        - GCP_PROJECT
-        - GCP_AUTH_KIND
-        - GCP_SERVICE_ACCOUNT_FILE
-
+      - AZURE_SUBSCRIPTION_ID
+      - AZURE_CLIENT_ID
+      - AZURE_SECRET
+      - AZURE_TENANT
+      - USER
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - GCP_PROJECT
+      - GCP_AUTH_KIND
+      - GCP_SERVICE_ACCOUNT_FILE
+    image: quay.io/nleiva/ee-web-image
+  logging:
+    level: warning
+  mode: stdout
   playbook-artifact:
     enable: false
-
-  mode: stdout

@@ -1,15 +1,15 @@
 az_location: 'East US'
 az_vm_size: Standard_B1s
-# az_storage_type: Standard_LRS
-# az_os_disk_type: StandardSSD_LRS
+az_storage_type: Standard_LRS
+az_os_disk_type: StandardSSD_LRS
 
 az_cidr_block: "172.16.0.0/16"
 az_subnet_block: "172.16.0.0/24"
 
 # Azure fixed resource names
 vm_username: "{{ username }}"
-az_prefix: "{{ prefix | default('testbed') }}"
-az_resource_group: "{{ az_prefix }}-rg"
+az_prefix: "{{ prefix | default('openenv-5n8wm') }}"
+az_resource_group: "{{ az_prefix }}"
 az_virtual_network: "{{ az_prefix }}-vnet"
 az_subnet: "{{ az_prefix }}-subnet"
 az_security_group: "{{ az_prefix }}-secgrp"

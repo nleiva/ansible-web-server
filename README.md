@@ -18,7 +18,7 @@ The goal is to provision one or more web server instances behind a load balancer
 
 Follow these steps to provision the Web Server(s).
 
-1. Create a Project with for this repo (`https://github.com/nleiva/ansible-web-server`). I called the Project `Azure WebServer` in the example below.
+1. Create a Project for this repo (`https://github.com/nleiva/ansible-web-server`). I called the Project `Azure WebServer` in the example below.
 
 <p align="center">
 <img src="./pictures/tower_project.png">
@@ -30,7 +30,7 @@ Follow these steps to provision the Web Server(s).
 <img src="./pictures/tower_Azure_cred.png">
 </p>
 
-3. The number and operating system of the backend servers is defined via the variable `vms`. Its default value is defined in the [vms file](vars/vms.yml). It list 2 instances; one running `centos`, and the other one `ubuntu` (these are the two distributions supported at the moment). You can override this with a new `vms` definition as an [Extra Variable](https://docs.ansible.com/ansible-tower/latest/html/userguide/job_templates.html#extra-variables).
+3. The number and operating system of the backend servers are defined via the variable `vms`. Its default value is defined in the [vms file](vars/vms.yml). It lists 2 instances; one running `centos`, and the other one `ubuntu` (these are the two distributions supported at the moment). You can override this with a new `vms` definition as an [Extra Variable](https://docs.ansible.com/ansible-tower/latest/html/userguide/job_templates.html#extra-variables).
 
 ```yaml
 vms:
@@ -106,7 +106,7 @@ ansible-navigator run main.yml
 <img src="./pictures/navigator_create.png">
 </p>
 
-#### EE Create Web Server in another cloud provider with custom domain
+#### EE Create Web Server in another cloud provider with a custom domain
 
 ```bash
 ansible-navigator run main.yml -e cloud=aws -e dns_zone=sandbox760.opentlc.com

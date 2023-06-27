@@ -3,5 +3,6 @@
     name: "{{ az_availability_set }}"
     resource_group: "{{ az_resource_group }}"
     location: "{{ az_location }}"
+    sku: "Aligned"
     tags:
       Environment: "{{ az_prefix }}"
