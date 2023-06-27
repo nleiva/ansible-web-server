@@ -1,19 +1,19 @@
 - name: Create shared resources
   block:
-  - name: Create Resource Group
-    ansible.builtin.include_tasks: create_rg.yml
+    - name: Create Resource Group
+      ansible.builtin.include_tasks: create_rg.yml
 
-  - name: Create Availability Set
-    ansible.builtin.include_tasks: create_aset.yml
+    - name: Create Availability Set
+      ansible.builtin.include_tasks: create_aset.yml
 
-  - name: Create Virtual Network
-    ansible.builtin.include_tasks: create_vn.yml
+    - name: Create Virtual Network
+      ansible.builtin.include_tasks: create_vn.yml
 
-  - name: Create Subnet
-    ansible.builtin.include_tasks: create_subnet.yml
+    - name: Create Subnet
+      ansible.builtin.include_tasks: create_subnet.yml
 
-  - name: Create Security Group
-    ansible.builtin.include_tasks: create_sg.yml
+    - name: Create Security Group
+      ansible.builtin.include_tasks: create_sg.yml
   when: first
 
 - name: Create Public IP

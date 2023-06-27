@@ -7,15 +7,15 @@
 
 - name: Delete shared resources
   block:
-  - name: Delete Security Group
-    ansible.builtin.include_tasks: delete_sg.yml
+    - name: Delete Security Group
+      ansible.builtin.include_tasks: delete_sg.yml
 
-  - name: Delete Availability Set
-    ansible.builtin.include_tasks: delete_aset.yml
+    - name: Delete Availability Set
+      ansible.builtin.include_tasks: delete_aset.yml
 
-  - name: Delete Virtual Network
-    ansible.builtin.include_tasks: delete_vn.yml
+    - name: Delete Virtual Network
+      ansible.builtin.include_tasks: delete_vn.yml
 
-  - name: Delete Resource Group
-    ansible.builtin.include_tasks: delete_rg.yml
+    - name: Delete Resource Group
+      ansible.builtin.include_tasks: delete_rg.yml
   when: last

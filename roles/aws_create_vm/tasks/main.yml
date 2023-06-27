@@ -1,22 +1,22 @@
 - name: Create shared resources
   block:
-  - name: Create SSH Key Pair
-    ansible.builtin.include_tasks: create_key_pair.yml
+    - name: Create SSH Key Pair
+      ansible.builtin.include_tasks: create_key_pair.yml
 
-  - name: Create VPC
-    ansible.builtin.include_tasks: create_vpc.yml
+    - name: Create VPC
+      ansible.builtin.include_tasks: create_vpc.yml
 
-  - name: Create Security Group
-    ansible.builtin.include_tasks: create_security_group.yml
+    - name: Create Security Group
+      ansible.builtin.include_tasks: create_security_group.yml
 
-  - name: Create Subnet
-    ansible.builtin.include_tasks: create_subnet.yml
+    - name: Create Subnet
+      ansible.builtin.include_tasks: create_subnet.yml
 
-  - name: Create Internet Gateway
-    ansible.builtin.include_tasks: create_igw.yml
+    - name: Create Internet Gateway
+      ansible.builtin.include_tasks: create_igw.yml
 
-  - name: Create Route Table
-    ansible.builtin.include_tasks: create_rt_table.yml
+    - name: Create Route Table
+      ansible.builtin.include_tasks: create_rt_table.yml
   when: first
 
 - name: Provision EC2 Instance
